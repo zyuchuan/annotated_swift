@@ -20,3 +20,15 @@ public struct Array<> : Collection,
 ```
 
 于是我们知道，Array是一个Collection，而且是一个RandomAccessCollection等。
+
+## 3. Int32的诞生
+
+说了那么多，下面我们通过一个例子，来说明Swift中，协议和类型是如何相互作用的。我们就以`Int32`为例，下面这个图是
+
+![](/assets/Int32_hierarchy.png)
+
+可以看到，即使是`Int32`这样一个简单的整数类型，也有很复杂的继承关系，表达了相当多的概念。下面来逐一分析。
+
+### 3.1 Equatable协议
+
+`Equatable`协议是Swift标准库中一个非常基础的协议，任何一个可以比较相等性的类型都是`Equatable`
