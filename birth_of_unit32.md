@@ -31,4 +31,23 @@ public struct Array<> : Collection,
 
 ### 3.1 Equatable协议
 
-`Equatable`协议是Swift标准库中一个非常基础的协议，任何一个可以比较相等性的类型都是`Equatable`
+`Equatable`协议是Swift标准库中一个非常基础的协议，任何一个可以比较相等性的类型都是`Equatable`，`Equatable`的定义相当简单：
+
+```
+// file: Equatable.swift
+
+public protocol Equatable {
+    static func ==(lhs: Self, rhs: Self) -> Bool
+}
+
+extension Equatable {
+    @_inlineable
+    @_transparent
+    public static func !=(lhs: Self, rhs: Self) -> Bool {
+        return !(lhs == rhs)
+    }
+```
+
+可以看到，Equatable协议实际只包含一个方法`func ==(lhs:rhs:)`，另一个方法`func !=(lhs:rhs:)`标准库已经有了默认的实现，不需要我们再写。
+
+
