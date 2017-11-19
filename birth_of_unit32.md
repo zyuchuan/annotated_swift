@@ -93,6 +93,8 @@ extension Comparable {
 对于`Strideable`协议，官方的解释是*“Conforming types are notionally contiuous, one-dimensional values that can be offset and measured.”*也就是“一维，连续的，可以偏移和测量的一些值。”（别问我这句话是意思，我也不知道！）
 
 ```
+// file: Stride.swift
+
 public protocol Strideable: _Strideible, Comparable {
     associatedtype Stride: SignedNumber, Comparable
     
@@ -102,10 +104,29 @@ public protocol Strideable: _Strideible, Comparable {
     static func _step(
         after current: (index: Int?, value: Self),
         from start: Self, by distance: Self.Stride) -> (index: Int? value: Self)
+
+    associatedtype _DisabledRangeIndex = _DisabledRangeIndex_
 }
+
 ```
 
 > `_Strideible`的定义和`Strideible`完全相同，将来`_Strideible`可能会从标准库中删去。
+
+`Strideible`协议继承了`Comparable`协议，标准库中也提供了默认的实现：
+
+```
+extension Strideible {
+    @_inline
+    public static func <(x: Self, y: Self) -> Bool {
+        return x.distance(to: y) > 0
+    }
+    
+    @_inline
+    public static func ==(x: Self, y: Self) -> Bool {
+        return x.distance(to: y) == 0
+    }
+}
+```
 
 
 
