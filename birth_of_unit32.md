@@ -50,4 +50,40 @@ extension Equatable {
 
 可以看到，Equatable协议实际只包含一个方法`func ==(lhs:rhs:)`，另一个方法`func !=(lhs:rhs:)`标准库已经有了默认的实现，不需要我们再写。
 
+### 3.2 Comparable
+
+`Comparable`协议定义了一种有序性的概念，也就是说可以比较大小，确切地说，可以用`<`和`==`操作符比较顺序。
+
+```
+// file: Comparable.swift
+
+public protocol Comparable: Equatable {
+    static func <(lhs: Self, rhs: Self) -> Bool 
+    static func <=(lhs: Self, rhs: Self) -> Bool
+    static func >=(lhs: Self, rhs: Self) -> Bool
+    static func >(lhs: Self, rhs: Self) -> Bool
+}
+```
+
+同样，如果你有一个`type`遵从`Comparable`协议，你不需要写出上面全部的方法，标注库已经贴心地为你提供了默认的实现，你只需要写`func==(lhs:rhs:)`和`func<(lhs:rhs:)`就好。
+
+```
+// file: Comparable.swift
+
+extension Comparable {
+    @_inlineable
+    public static func >(lsh: Self, rhs: Self) -> Bool {
+        return rhs < lhs
+    }
+    
+    @_inlineable
+    public static func <=(lhs: Self, rhs: Self) -> Bool {
+        return !(rhs < lhs)
+    }
+    
+    @_inlineable
+    public static func >=(lhs: Self, rhs: Self) -> Bool {
+        return !(lhs < rhs)
+    }
+```
 
