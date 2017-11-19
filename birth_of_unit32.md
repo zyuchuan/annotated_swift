@@ -88,3 +88,21 @@ extension Comparable {
 }
 ```
 
+### 3.3 _Strideable和Strideable
+
+对于`_Strideable`协议，官方的解释是*“Conforming types are notionally contiuous, one-dimensional values that can be offset and measured.”*也就是“一维，连续的，可以偏移和测量的一些值。”（别问我这句话是意思，我也不知道！）
+
+```
+public protocol _Strideable: Equatable {
+    associatedtype Stride: SignedNumber, Comparable
+    
+    func distance(to other: Self) -> Stride
+    func advanced(by n: Stride) -> Self
+    
+    static func _step(
+        after current: (index: Int?, value: Self),
+        from start: Self, by distance: Self.Stride) -> (index: Int? value: Self)
+}
+```
+
+初次之外，标准库还定义了`Strideable`协议
