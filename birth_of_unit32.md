@@ -199,4 +199,47 @@ Concept: An integer type that uses a fixed size for every instance.
 
 Concept: An integer type that can represent both positive and negative values.
 
+### 3.8 ExpressibleByIntegerLiteral
+
+Concept: 一个可以用整形字面量（integer literal）初始化的类型。
+
+标准库中的整形和浮点类型，比如`Int`和`Double`，都遵从`ExpressibleByIntegeralLiteral`协议，也就是说你可以通过赋值的方法给变量初始化。
+
+```
+// Type inferred as Int
+let cookieCount = 12
+
+// An array of Int
+let chipsPerCookie = [1, 2, 3, 5]
+
+// A floating-point value initialized using an integer literal
+let redPercentage: Double = 1
+// redPercentage = 1.0
+```
+
+这个协议的定义相当简单：
+
+```
+file: CompilerProtocols.swift
+
+public protocol ExpressibleByIntegerLiteral {
+    associatedtype IntegerLiteralTYpe: _ExpressibleByBuiltinIntegerLiteral
+
+    init(integerLiteral value: IntegerLiteralType)
+}
+```
+
+当让，你不需要自己实现一个`init`方法，应为标准库已经替你实现了一个：
+
+```
+// file: Integers.swift
+
+extension ExpressibleByIntegerLiteral where Self: _ExpressibleByBuiltinIntegerLiteral {
+    @_inlineable
+    @_transparent
+    public init(integerLiteral value: Self) {
+        self = value
+    }
+}
+```
 
