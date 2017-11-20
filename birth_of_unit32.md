@@ -98,11 +98,24 @@ extension Comparable {
 
 ```
 public protocol Numeric : Equatable, ExpressibleByIntegerLiteral {
+    
     static func +(_ lhs: Self, _ rhs: Self) -> Self
+    static func +=(_ lhs: inout Self, rhs: Self)
     static func -(_ lhs: Self, _ rhs: Self) -> Self
+    static func -=(_ lhs: inout Self, rhs: Self)
+    static func *(_ lhs: Self, _ rhs: Self) -> Self
     static func *=(_ lhs: inout Self, rhs: Self)
 }
 ```
+
+说明：
+
+1. 除法不是`Numeric`协议的一部分
+2. `Numeric`协议不能作用于不同类型，这就是你不能写出`2+2.0`的原因
+
+### 3.4 SignedInteger
+
+### 3.5 CustomStringConvertible
 
 
 
