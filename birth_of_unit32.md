@@ -189,8 +189,14 @@ public protocol BinaryInteger:
 2. 整形数值之间的比较：你可以使用关系运算符，如`<`，`==`等，比较不同类型的`binary integer`。 
 
 
+### 3.6 FixedWidthInteger
 
-### 3.5 CustomStringConvertible
+Concept: An integer type that uses a fixed size for every instance.
 
+`FixedWidthInteger`协议在`BinaryInteger`的基础上增加了位操作，位偏移，以及溢出处理等操作。
+
+### 3.7 SignedInteger
+
+Concept: An integer type that can represent both positive and negative values.
 
 
