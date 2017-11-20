@@ -145,6 +145,45 @@ extension SignedNumeric {
         self = 0 - self
     }
 }
+```
+
+### 3.5 BinaryInteger
+
+Concept: 一个可以用二进制表示的整数。
+
+`BinaryInteger`协议是Swift标准库中定义的所有整数类型的基础协议，所有整数类型，如`Int`, `UInt32`等，都遵从这个协议。
+
+```
+public protocol BinaryInteger: 
+    Hashable, Numeric, CustomStringConvertible, Strideable
+    where Magnitude: BinaryInteger, Magnitude.Magnitude == Magnitude {
+    
+    static var isSigned: Bool { get }
+    
+    // Creates an integer from the given floating-point value.
+    // If the value passed as 'source` is not representable exactly, the
+    // result is nil.
+    init?<T: BinaryFloatingPoint>(exactly source: T)
+
+    // Creates an integer from the given floating-point value, rounding
+    // toward zero.
+    init<T: BinaryFloatingPoint>(_ source: T)
+    
+    // Creates a new instance from the given integer.
+    init<T: BinaryInteger>(_ source: T)
+
+    ...
+    
+    static func /(_ lhs: Self, _ rhs: Self) -> Self
+    static func /=(_ lhs: inout Self, _ rhs: Self)
+    static func %(_ lhs: Self, _ rhs: Self) -> Self
+    static func %=(_ lhs: inout Self, _ rhs: Self)
+    
+    ...
+}
+```
+
+`BinaryInteger`的源代码很长，由于篇幅的原因，就不一一列举了。
 
 
 ### 3.5 CustomStringConvertible
