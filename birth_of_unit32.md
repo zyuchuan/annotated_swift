@@ -113,7 +113,39 @@ public protocol Numeric : Equatable, ExpressibleByIntegerLiteral {
 1. 除法不是`Numeric`协议的一部分
 2. `Numeric`协议不能作用于不同类型，这就是你不能写出`2+2.0`的原因
 
-### 3.4 SignedInteger
+### 3.4 SignedNumeric
+
+`SignedNumeric`定义了一个可以是正值，也可以是负值的类型。
+
+`SignedNumeric`协议扩展了`Numeric`协议的操作。以执行反向操作。
+
+`SignedNumeric`协议对所有的操作都有默认实现
+
+```
+public protocol SignedNumeric: Numeric {
+    // The negation operator (prefix '-`) returns the additive inverse of
+    // its argument.
+    static prefix func -(_ operand: Self) -> Self
+    
+    mutating func negate()
+}
+
+extension SignedNumeric {
+    @_inlineable
+    @_transparent
+    public static prefix func -(_ operand: Self) -> Self {
+        var result = operand
+        result.negate()
+        return result
+    }
+    
+    @_inline
+    @_transparent
+    public mutating func negate() {
+        self = 0 - self
+    }
+}
+
 
 ### 3.5 CustomStringConvertible
 
