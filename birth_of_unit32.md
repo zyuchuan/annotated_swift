@@ -243,3 +243,32 @@ extension ExpressibleByIntegerLiteral where Self: _ExpressibleByBuiltinIntegerLi
 }
 ```
 
+### 3.9 CustomStringConvertible
+
+这是一个使用很普遍的协议，这个协议定义了一个方法，可以将一个实例转化成一个字符串。
+
+这个协议很简单，只有一个`description`属性。比如说
+
+```
+file: OutputStream.swift
+
+public protocol CustomStringConvertible {
+    var description: String { get }
+}
+```
+下面举例说明其用法
+
+```
+struct Point {
+    ...
+}
+```
+你希望可以打印出
+
+``` 
+extension Point: CustomStringConvertible {
+    var description: String {
+        return "(\(x), \(y))"
+    } 
+}
+```
