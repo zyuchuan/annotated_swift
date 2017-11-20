@@ -183,8 +183,10 @@ public protocol BinaryInteger:
 }
 ```
 
-`BinaryInteger`的源代码很长，由于篇幅的原因，就不一一列举了。
+`BinaryInteger`的源代码很长，由于篇幅的原因，就不一一列举了。总的来说，定义了一下的操作：
 
+1. 不同数值类型之间的转换：你可以从一个浮点型数值，或其它任意类型的`binary integer`创建出一个遵从`BinaryInteger`协议的新实例。`BinaryInteger`协议定义了四种不同的创建实例的方法。
+2. 整形数值之间的比较：你可以使用关系运算符，如`<`，`==`等，比较不同类型的`binary integer`。 
 
 ### 3.5 CustomStringConvertible
 
