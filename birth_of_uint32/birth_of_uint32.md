@@ -8,17 +8,15 @@
 
 作为一门面向协议的语言，Swift通过**协议**、或者说**protocol**，来表达特定的概念。比如`Equatable protocol`表达的概念就是**可比较相等性**，`Comparable protocol`表达的概念就是**不仅可以比较相等性，还可以比较顺序性**（因为`Comparable`继承于`Equatable`）。
 
-  4.0标准库中定义了超过60个`协议 (protocol)`，每个`protocol`都表达了一种特定的`Concept`，，`Comparable`表达的概念就是“可比较相等性，且有序可比较大小”（因为`Comparable`继承自`Equatable`，所以）
+Swift的`protocol`有两个超赞的特性：
 
-A protocol defines a blueprint of methods, properties, and other requirements that suit a particular task or piece of functionality. The protocol can then be adopted by a class, structure, or enumeration to provide an actual implementation of those requirements. Any type that satisfies the requirements of a protocol is said to conform to that protocol.
+1. `protocol`是可以继承的，这使`protocol`有了面向对象的特性，有利于复杂系统的设计。
 
-Swift是一门面向协议的语言。在Swift中，协议，也就是`protocol`是一种接口，更准确地说，是表达了一种概念。比如`equatable`协议表达的概念就是可比较的，为了表达可比较的这种概念，用Swift的方式表达就是`func operator==()`和`func operator !=()`。
+2. `protocol`中的方法或属性可以有默认的实现，这是`protocol`真正的威力所在，比如你有一个类，你打算让这个类遵从`collection`协议，你所要做的就是实现7个必须的方法，然后你就可以使用`collection`协议中定义的上百个方法了，因为那些方法全部通过这七个方法实现。
 
-Swift 4.0标准库中定义了超过60个`protocol`，每个`protocol`都表达了特定的概念。特点如下：
+Swift 4.0标准库中定义了超过60个`protocol`，这些协议互相继承，同时又被多个类型遵从，时常让人感到困扰。
 
-1. Swift的`protocol`是可以继承的，比如`comparable`就继承自`equatable`，这里的隐含的概念就是说，一个类型如果符合`comparable`，那它一定是可比较相等性的。
 
-2. 协议可以定义默认的实现，这是一个非常有用的特性，因为你有一个type，符合`comparable`, 你不需要写出全部六个方法，你只需要写出两个方法，
 
 ## 2. Swift中的类型
 
