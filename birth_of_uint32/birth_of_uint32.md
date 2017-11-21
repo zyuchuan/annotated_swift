@@ -6,6 +6,10 @@
 
 ## 1. Swift的协议
 
+Swift 4.0标准库中定义了超过60个`协议 (protocol)`，每个`protocol`都表达了一种特定的`Concept`，比如`Equatable`表达的概念就是“可比较相等性”，`Comparable`表达的概念就是“可比较相等性，且有序可比较大小”（因为`Comparable`继承自`Equatable`，所以）
+
+A protocol defines a blueprint of methods, properties, and other requirements that suit a particular task or piece of functionality. The protocol can then be adopted by a class, structure, or enumeration to provide an actual implementation of those requirements. Any type that satisfies the requirements of a protocol is said to conform to that protocol.
+
 Swift是一门面向协议的语言。在Swift中，协议，也就是`protocol`是一种接口，更准确地说，是表达了一种概念。比如`equatable`协议表达的概念就是可比较的，为了表达可比较的这种概念，用Swift的方式表达就是`func operator==()`和`func operator !=()`。
 
 Swift 4.0标准库中定义了超过60个`protocol`，每个`protocol`都表达了特定的概念。特点如下：
