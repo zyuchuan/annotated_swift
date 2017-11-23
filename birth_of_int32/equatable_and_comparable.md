@@ -74,18 +74,25 @@ extension Comparable {
 我们通过一个例子来说明`Comparable`的用法，这个例子取自Swift官方文档：
 
 ```
+// 一个自定义类型
 struct Date {
   let year: Int
   let month: Int
   let day: Int
 }
 
+// 我们希望Date遵从Comparable协议
 extension Date: Comparable {
+
+  // Equatable
+  // 不需要定义 !=，因为已有默认实现
   static func ==(lhs: Date, rhs: Date) -> Bool {
     return lhs.year == rhs.year && lhs.month == rhs.month
        &&  lhs.day == rhs.day
    }
 
+  // Comparable
+  // 不需要定义 <=, >, >=，因为已有默认实现
   static func <(lhs: Date, rhs: Date) -> Bool {
     if lhs.year != hrs.year {
       return lhs.year < rhs.year
@@ -95,9 +102,11 @@ extension Date: Comparable {
       return lhs.day < rhs.day
     }
   }
+}
   
 let spaceOddity = Date(year: 1969, month: 7, day: 11)
 let moonLanding = Date(year: 1969, month: 7, day: 20)
+
 if moonLanding > spaceOddify {
   print("Major Tom stepped through the door first.")
 } else {
