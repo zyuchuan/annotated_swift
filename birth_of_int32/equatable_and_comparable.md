@@ -45,3 +45,27 @@ public protocol Comparable : Equatable {
   static func > (lhs: Self, rhs: Self) -> Bool
 }
 ```
+
+`Comparable`一共定义了六个方法（别忘了还有两个继承自`Equatable`），也就是说一个`type`要是遵从`Comparable`协议，就必须实现这六个方法。不过不必担心，标准库已经很贴心地为其中的四个方法提供了默认的实现，用户只需要提供`==`和`<`就可以了。
+
+```
+// file: Comparable.swift
+
+extension Comparable {
+  @_inlineable
+  public static func > (lhs: Self, rhs: Self) -> Bool {
+    return rhs < lhs
+  }
+
+
+  @_inlineable
+  public static func <= (lhs: Self, rhs: Self) -> Bool {
+    return !(rhs < lhs)
+  }
+
+  @_inlineable
+  public static func >= (lhs: Self, rhs: Self) -> Bool {
+    return !(lhs < rhs)
+  }
+}
+```
