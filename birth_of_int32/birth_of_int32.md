@@ -30,3 +30,5 @@ Swift的`protocol`有两个超赞的特性：
 
 `Int32`到底表达了什么样的概念，我们下回接着说。
 
+[下一篇：Equatable和Comparable](equatable_and_comparable.md)
+
