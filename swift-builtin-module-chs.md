@@ -123,7 +123,7 @@ public func +(lhs: Int, rhs: Int) -> Int {
 
 ## 我可以使用Builtin吗？
 
-`Builtin`模块只有在标准库内部才可以访问，一般的程序是没有办法的。但是我们可以
+`Builtin`模块只有在标准库内部才可以访问，一般的Swift程序是没有办法调用`Builtin`中的方法的。但是我们有办法绕过这一限制，举个例子：
 
 ```
 import Swift // Import swift stdlib
@@ -138,7 +138,8 @@ let result2 = Builtin.sadd_with_overflow_Int64(
     true._getBuiltinLogicValue())
 print(unsafeBitCast(result2.0, Int.self))
 ```
-在编译的时候需要指定`-parse-stdlib`：
+
+只需要指定`-parse-stdlib`，上面的代码就可以编译。
 
 ```
 swiftc -parse-stdlib add.swift && ./add
