@@ -25,21 +25,19 @@ public struct Int : SignedIntegerType, Comparable, Equatable, {
 
 ## Clang, Swift Compiler, SIL, IR, LLVM
 
-要弄明白`Builtin`是什么，先要明白Objective-C和Swift编译器是怎样工作的
+要弄明白`Builtin`是什么，先要明白Objective-C和Swift编译器是怎样工作的。
 
 ![How Objective-C compilers works](/assets/fig_01.png)
 
-如上图所示，Objective-C代码经过Clang处理后，生成**LLVM Intermediate Representation (IR)**，再经过LLVM处理，最后生成机器码。
+上图显示了Objective-C代码的编译过程：Objective-C代码经过Clang处理后，生成**LLVM Intermediate Representation (IR)**，再经过LLVM处理，最后生成机器码。
 
-可以把LLVM IR想象成某种高级的汇编语言，这种汇编语言不依赖于特定的架构，如i386或ARM等。任何一个编译器，只要能生成LLVM IR，就可以用LLVM生成和特定的CPU架构兼容的机器码。
+可以把LLVM IR想象成某种高级的汇编语言，这种汇编语言和CPU架构（如i386或ARM）无关。任何一个编译器，只要能生成LLVM IR，就可以用LLVM生成和特定的CPU架构兼容的机器码。
 
 明白了这点，我们再来看Swift编译器是如何工作的：
 
 ![How Swift compilers works](/assets/fig_02.png)
 
-Swift代码首先被编译成SIL (Swift Intermediate Represention)，然后再被编译成LLVM IR进入LLVM编译器，最后生成机器码。
-
-看到这里你大概已经猜到了SIL就是LLVM IR的一层外包装，我们有很多理由需要SIL：比如确保变量在使用之前被初始化，检测不可执行的代码，优化代码等。你可以看这个[视频](https://www.youtube.com/watch?v=Ntj8ab-5cvE)，如果你想知道SIL具体干了些啥。
+Swift代码首先被编译成SIL (Swift Intermediate Represention)，然后再被编译成LLVM IR进入LLVM编译器，最后生成机器码。而SIL无非就是LLVM IR的一层Swift外壳（swifty wrapper），我们有很多理由需要SIL：比如确保变量在使用之前被初始化、检测不可执行的代码（unreachable code），优化代码等。如果你想知道SIL具体干了些啥，可以看这个[视频](https://www.youtube.com/watch?v=Ntj8ab-5cvE)，。
 
 ## Builtin
 
