@@ -96,7 +96,7 @@ ret i32 0
 
 ## Builtin模块
 
-回到Swift，我们知道在Swift中，`Int`实际上一个`struct`，而`+`是一个全局的方法（global function），而且这个方法针对`Int`类型有重载版本。严格说来，`Int`和`+`不是Swift语言的一部分，它们是Swift标准库的一部分。既然不是原生态，是不是就意味着操作`Int`或`+`的时候会有额外的负担，导致Swift跑得慢？当然不是，因为我们有`Builtin`。
+回到Swift，我们知道在Swift中，`Int`实际上一个`struct`，而`+`是一个针对`Int`重载的全局方法（global function）。严格说来，`Int`和`+`不是Swift语言的一部分，它们是Swift标准库的一部分。既然不是原生态，是不是就意味着操作`Int`或`+`的时候会有额外的负担，导致Swift跑得慢？当然不是，因为我们有`Builtin`。
 
 `Builtin`将LLVM IR的类型和方法直接暴露给Swift标准库，所以我们在操作`Int`和`+`的时候，没有额外的运行时负担。
 
