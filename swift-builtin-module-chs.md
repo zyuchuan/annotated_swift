@@ -21,7 +21,7 @@ public struct Int : SignedIntegerType, Comparable, Equatable, {
 * `Builtin.NativeObject`
 * `Builtin.allocRaw(size._builtinWordValue,Builtin.alignof(Memory.self)))`
 
-究竟什么是`Builtin`？
+那些反复出现的`Builtin`可能会让你感到困惑：那TM是什么玩意？
 
 ## Clang, Swift Compiler, SIL, IR, LLVM
 
