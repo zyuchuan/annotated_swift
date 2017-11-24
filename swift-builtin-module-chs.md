@@ -113,5 +113,45 @@ public static func alloc(num: Int) -> UnsafeMutablePointer {
 }
 ```
 
+现在我们知道了，`Int`并不会导致性能损失，那`operator+`呢？这是一个方法，定义如下：
 
+```
+@_transparent
+public func +(lhs: Int, rhs: Int) -> Int {
+  let (result, error) = Builtin.sadd_with_overflow_Int64(
+    lhs._value, rhs._value, true._value)
+  // return overflowChecked((Int(result), Bool(error)))
+  Builtin.condfail(error)
+  return Int(result)
+}
+```
+
+* `@_transparent`表示这个函数应该是个内联的(inline)。
+* `Builtin.sadd_with_overflow_Int64`就是`llvm.sadd.with.overflow.i64`。
+* 相加的和被转换成`Int`类型，然后返回。
+
+我们可以认为上面的代码内联展开后，会生成高效的LLVM IR代码。
+
+## 我可以使用Builtin吗？
+
+`Builtin`模块只有在标准库内部才可以访问，一般的程序是没有办法的。但是我们可以
+
+```
+import Swift // Import swift stdlib
+
+let result = Builtin.sadd_with_overflow_Int64(5.value, 6.value,
+    true._getBuiltinLogicValue())
+print(Int(result.0))
+
+let result2 = Builtin.sadd_with_overflow_Int64(
+    unsafeBitCast(5, Builtin.Int64), 
+    unsafeBitCast(6, Builtin.Int64),
+    true._getBuiltinLogicValue())
+print(unsafeBitCast(result2.0, Int.self))
+```
+在编译的时候需要指定`-parse-stdlib`：
+
+```
+swiftc -parse-stdlib add.swift && ./add
+```
 
