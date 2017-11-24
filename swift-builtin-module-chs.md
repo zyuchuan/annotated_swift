@@ -94,9 +94,9 @@ ret i32 0
 * `i64`是定义在LLVM中的一个类型，代表64位整数。
 * `llvm.sadd.with.overflow.i64`是个方法，这个方法将两个`i64`整数相加并返回两个值：一个表示相加的和，另一个标识操作是否成功。
 
-## Builtin
+## Builtin模块
 
-我们已经知道在Swift中，`Int`实际上一个`struct`，而`+`是一个global的方法，这个方法被重载了，Int。严格说，`Int`和`+`不是Swift语言的一部分，它们是Swift标准库的一部分，也就是说它们不是Swift的原生的构造，那是不是意味着Swift很慢呢？当然不是。
+回到Swift，我们知道在Swift中，`Int`实际上一个`struct`，而`+`是一个全局的方法（global function），而且这个方法针对`Int`类型有重载版本。严格说来，`Int`和`+`不是Swift语言的一部分，它们是Swift标准库的一部分。既然不是原生态，是不是就意味着的操作`Int`或`+`的时候会有额外的负担，也就是说Swift会跑得慢？当然不是。
 
 这正是`Builtin`大展身手的地方。`Builtin`模块暴露了LLVM IR的`type`和`method`向标准库，这就意味着没有运行时查表的负担，这让在`Int`上施行的操作就像
 
