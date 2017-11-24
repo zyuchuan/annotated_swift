@@ -89,6 +89,11 @@ store i64 %8, i64* getelementptr inbounds (%Si* @_Tv8addswift1cSi, i32 0, i32 0)
 ret i32 0
 ```
 
+我知道你觉得上面的代码就像一坨屎，不过还是请注意：
+
+* `i64`是定义在LLVM中的一个类型，代表64位整数。
+* `llvm.sadd.with.overflow.i64`是个方法，这个方法将两个`i64`整数相加并返回两个值：一个表示相加的和，另一个标识操作是否成功。
+
 ## Builtin
 
 我们已经知道在Swift中，`Int`实际上一个`struct`，而`+`是一个global的方法，这个方法被重载了，Int。严格说，`Int`和`+`不是Swift语言的一部分，它们是Swift标准库的一部分，也就是说它们不是Swift的原生的构造，那是不是意味着Swift很慢呢？当然不是。
