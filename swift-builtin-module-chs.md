@@ -37,7 +37,7 @@ public struct Int : SignedIntegerType, Comparable, Equatable, {
 
 ![How Swift compilers works](/assets/fig_02.png)
 
-Swift代码首先被编译成SIL (Swift Intermediate Represention)，然后再被编译成LLVM IR进入LLVM编译器，最后生成机器码。而SIL无非就是LLVM IR的一层Swift外壳（swifty wrapper），我们有很多理由需要SIL：比如确保变量在使用之前被初始化、检测不可执行的代码（unreachable code），优化代码等。如果你想知道SIL具体干了些啥，可以看这个[视频](https://www.youtube.com/watch?v=Ntj8ab-5cvE)，。
+Swift代码首先被编译成SIL (Swift Intermediate Represention)，然后再被编译成LLVM IR进入LLVM编译器，最后生成机器码。而SIL无非就是LLVM IR的一层Swift外壳（swifty wrapper），我们有很多理由需要SIL：比如确保变量在使用之前被初始化、检测不可执行的代码（unreachable code），优化代码等。如果你想知道SIL具体干了些啥，可以去看看这个[视频](https://www.youtube.com/watch?v=Ntj8ab-5cvE)。
 
 ## Builtin
 
