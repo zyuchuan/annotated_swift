@@ -100,20 +100,9 @@ ret i32 0
 
 `Builtin`将LLVM IR的类型和方法直接暴露给Swift标准库，所以我们在操作`Int`和`+`的时候，没有额外的运行时负担。
 
-在Swift中，`struct Int`中有一个属性`value`，类型是`Builtin.Int64`。们可以是有`unsafeBitCast`在`Int`和`Builtin.Int64`之间相互转换。标准库还重载了`init`方法，使得我们可以从`Builtin.Int64`构造一个`Int`。
+以`Int`为例，`Int`在标准库中是一个`struct`，定义了一个属性`value`，类型是`Builtin.Int64`。我们可以用`unsafeBitCast`将`value`属性在`Int`和`Builtin.Int64`之间相互转换。`Int`还重载了`init`方法，使得我们可以从`Builtin.Int64`直接构造一个`Int`。这些都是高效的操作，不会导致性能损失。
 
-还有，`UnsafePointer`也是`Builtin`之上的一个外壳，可以让我们直接分配内存。比如：
-
-```
-public static func alloc(num: Int) -> UnsafeMutablePointer {
-  let size = strideof(Memory.self) * num
-  return UnsafeMutablePointer(
-      Builtin.allocRaw(size._builtinWordValue, 
-          Builtin.alignof(Memory.self)))
-}
-```
-
-现在我们知道了，`Int`并不会导致性能损失，那`operator+`呢？这是一个方法，定义如下：
+那`+`呢？这可是一个方法，调用方法通常都会有一些性能损失。我们来看看`+`是如何定义的：
 
 ```
 @_transparent
@@ -130,7 +119,7 @@ public func +(lhs: Int, rhs: Int) -> Int {
 * `Builtin.sadd_with_overflow_Int64`就是`llvm.sadd.with.overflow.i64`。
 * 相加的和被转换成`Int`类型，然后返回。
 
-我们可以认为上面的代码内联展开后，会生成高效的LLVM IR代码。
+因为这是一个`inline`方法，我们有理由相信编译器会内联展开方法调用并生成高效的LLVM IR代码。
 
 ## 我可以使用Builtin吗？
 
