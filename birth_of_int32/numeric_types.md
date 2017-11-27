@@ -30,6 +30,25 @@ public protocol Numeric : Equatable, ExpressibleByIntegerLiteral {
 
 不建议使用`Numeric`，那使用什么呢？
 
+## SignedNumeric
+
+```
+public protocol SignedNumeric: Numeric {
+  static prefix func -(_ operand: Self) -> Self
+  mutating func negate()
+}
+
+extension SugnedNumeric {
+  public static prefix func -(_ operand: Self) -> Self {
+    var result = operand
+    result.negate()
+    return result
+  }
+}
+```
+
+`SginedNumeric`在`Numeric`的基础上定义了`func -()`
+
 
 
 
