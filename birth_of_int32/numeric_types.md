@@ -33,6 +33,8 @@ public protocol Numeric : Equatable, ExpressibleByIntegerLiteral {
 ## SignedNumeric
 
 ```
+// file: Integers.swift
+
 public protocol SignedNumeric: Numeric {
   static prefix func -(_ operand: Self) -> Self
   mutating func negate()
@@ -44,10 +46,18 @@ extension SugnedNumeric {
     result.negate()
     return result
   }
+  
+  public mutating func negate() {
+    self = 0 - self
+  }
 }
 ```
 
 `SginedNumeric`在`Numeric`的基础上定义了`func -()`
+
+目前为止的协议都很简单，下一篇，我们将探讨`BinaryInteger`
+
+
 
 
 
